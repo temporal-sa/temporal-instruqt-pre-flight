@@ -1,6 +1,24 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Ziggy is ready</title>
-<link rel="stylesheet" href="/assets/css/temporal-theme.css"><style>
-body { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 16px; background: radial-gradient(ellipse at 50% 70%, #262052, #141414 70%); }
-img { width: min(55vw, 205px); display: block; margin: 0 auto; } h1 { font-size: 22px; font-weight: 400; margin: 8px 0; } p { font: 12px var(--font-mono); color: var(--green); } .eyebrow { font-size: 10px; color: var(--indigo-100); }
-</style></head><body><main><p class="eyebrow">Space suit? Optional. Browser? Essential.</p><img src="/assets/brand/ziggy-peek.png" alt="Ziggy, Temporal’s smiling space explorer"><h1>Ready when you are.</h1><p>Eight legs. One working browser.</p></main></body></html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ziggy is ready</title>
+  <link rel="stylesheet" href="/assets/css/temporal-theme.css">
+  <link rel="stylesheet" href="/static/ziggy.css">
+  <script src="/assets/js/starfield.js" defer></script>
+  <script src="/static/motion.js" defer></script>
+</head>
+<body>
+  <canvas id="stars" aria-hidden="true"></canvas>
+  <button id="motion-toggle" type="button" aria-pressed="false">Pause animation</button>
+  <main>
+    <p class="eyebrow">Space suit? Optional. Browser? Essential.</p>
+    <div class="ziggy" role="img" aria-label="Ziggy, Temporal’s smiling space explorer">
+      <img class="ziggy-open" src="/assets/brand/ziggy-peek.png" alt="" width="1254" height="1254">
+      <img class="ziggy-blink" src="/assets/brand/ziggy-blink.png" alt="" width="1254" height="1254">
+    </div>
+    <h1>Ready when you are.</h1>
+    <p>Eight legs. One working browser.</p>
+  </main>
+</body>
+</html>

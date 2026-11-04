@@ -1,15 +1,18 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="launchpad-page">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ziggy’s launch clearance · Temporal pre-flight</title>
   <link rel="stylesheet" href="/assets/css/temporal-theme.css">
   <link rel="stylesheet" href="/assets/css/temporal-components.css">
   <link rel="stylesheet" href="/static/flight.css">
+  <script src="/assets/js/starfield.js" defer></script>
+  <script src="/static/motion.js" defer></script>
   <script src="/static/flight.js" defer></script>
 </head>
 <body>
-  <header class="masthead"><img src="/assets/brand/temporal-logo.svg" alt="Temporal" width="134" height="28"><span class="eyebrow">Pre-flight / 01</span></header>
+  <canvas id="stars" aria-hidden="true"></canvas>
+  <header class="masthead"><img src="/assets/brand/temporal-logo.svg" alt="Temporal" width="134" height="28"><div class="masthead-actions"><button id="motion-toggle" type="button" class="button ghost off-white small" aria-pressed="false">Pause animation</button><span class="eyebrow">Pre-flight / 01</span></div></header>
   <main>
     <section class="intro">
       <div><p class="eyebrow">A small check before a big idea</p>

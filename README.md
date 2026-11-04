@@ -4,6 +4,8 @@ Check that a guest’s webinar laptop can display Ziggy, the code editor, live t
 
 The course has one challenge and four quick visual confirmations. It also checks a browser WebSocket round trip. A blocked page gets specific help and a readiness report the guest can copy to their organizer.
 
+Ziggy bobs and blinks against an animated starfield. Use **Pause animation** to stop the motion; the page also respects your system’s reduced-motion setting. Launchpad scrolls inside the Instruqt frame so all four checks remain reachable.
+
 ## Run it
 
 For contributors: Docker, Docker Compose and `make`.

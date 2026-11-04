@@ -68,6 +68,8 @@ Open http://localhost:5000. Local clock viewing via `make terminal` substitutes 
 Instruqt’s local validator, Compose configuration validation and the current Fieldkit project validator passed. The authoring workspace could not access the Docker socket or computer-use permissions. The following runtime and visual checks are pending; do not describe the course as tested on Instruqt until they pass.
 
 - Run `make test`, then `make demo` from a clean checkout. Confirm all previews and the welcome file actually render, the clock changes and all four confirmations complete.
+- At a 1280×720 browser window and in the narrower Instruqt service frame, scroll Launchpad to the step 3 and 4 buttons and the readiness report. Check keyboard access too. The page must scroll even though the shared component stylesheet defaults to a fixed booth layout.
+- Confirm Ziggy bobs and blinks and the stars move. **Pause animation** on Launchpad must pause both its background and the Ziggy preview; the standalone Browser tab also has its own control. Enable reduced motion and confirm the mascot and stars stay still.
 - Use two browser contexts. Confirm their answers and reports stay separate. Refresh one context; its answers should return where session storage is allowed. With storage blocked, the check should still work for that page visit.
 - Block `/ws` in browser dev tools. Four visual confirmations must not produce clearance. Confirm the incomplete report remains available. Restore the connection and reload; it should complete after a real round trip.
 - Test a failed page and an answer changed from yes to issue. Neither should produce a completed readiness result.

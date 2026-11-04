@@ -1,0 +1,21 @@
+html { min-height: 100%; }
+body { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 38px 16px 16px; background: radial-gradient(ellipse at 50% 70%, #262052, #141414 70%); }
+#stars { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: .7; }
+main { position: relative; z-index: 1; }
+.ziggy { width: min(55vw, 48vh, 205px); position: relative; margin: 0 auto; animation: ziggy-bob 10s ease-in-out infinite; }
+.ziggy img { display: block; width: 100%; height: auto; }
+.ziggy-open { opacity: 1; animation: ziggy-eyes-open 10s steps(1, end) infinite; }
+.ziggy-blink { position: absolute; inset: 0; opacity: 0; animation: ziggy-eyes-closed 10s steps(1, end) infinite; }
+h1 { font-size: 22px; font-weight: 400; margin: 8px 0; }
+p { font: 12px var(--font-mono); color: var(--green); }
+.eyebrow { font-size: 10px; color: var(--indigo-100); }
+#motion-toggle { position: absolute; top: 8px; right: 10px; z-index: 2; min-height: 28px; padding: 4px 8px; border: 1px solid var(--slate-300); color: var(--indigo-100); background: var(--space-black); font: 10px var(--font-mono); cursor: pointer; }
+#motion-toggle:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; }
+#motion-toggle:disabled { cursor: default; }
+@keyframes ziggy-bob { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-10px) rotate(2deg); } }
+/* Instant swaps keep both frames aligned; each blink lasts about 140 ms. */
+@keyframes ziggy-eyes-open { 0%, 10.4%, 77.4%, 81.4%, 100% { opacity: 1; } 9%, 76%, 80% { opacity: 0; } }
+@keyframes ziggy-eyes-closed { 0%, 10.4%, 77.4%, 81.4%, 100% { opacity: 0; } 9%, 76%, 80% { opacity: 1; } }
+html[data-motion-paused="true"] .ziggy,
+html[data-motion-paused="true"] .ziggy img { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) { .ziggy, .ziggy img { animation: none; } }

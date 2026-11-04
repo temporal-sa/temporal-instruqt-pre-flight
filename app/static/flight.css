@@ -1,4 +1,10 @@
-body { background: var(--space-black); font-weight: 400; }
+/* The shared components default to a fixed booth screen with overflow hidden.
+   Launchpad is a document inside an Instruqt frame: let the root scroll. */
+html.launchpad-page { height: auto; min-height: 100%; overflow-y: auto; font-size: 16px; }
+.launchpad-page body { height: auto; min-height: 100vh; overflow: visible; background: var(--space-black); font-weight: 400; }
+#stars { position: fixed; inset: 0; z-index: 0; opacity: .35; pointer-events: none; }
+.masthead, body > main { position: relative; z-index: 1; }
+.masthead-actions { display: flex; align-items: center; flex-wrap: wrap; justify-content: flex-end; gap: 12px; }
 .masthead { max-width: 1440px; margin: auto; padding: 24px 32px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); }
 main { max-width: 1440px; padding: 32px; margin: auto; }
 .intro { display: flex; gap: 32px; justify-content: space-between; align-items: center; margin-bottom: 30px; }
