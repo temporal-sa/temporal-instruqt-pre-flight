@@ -1,0 +1,6 @@
+#!/bin/bash
+set -euo pipefail
+if ! curl --fail --silent --max-time 5 http://127.0.0.1:5000/api/completion > /dev/null; then
+  fail-message "Open Launchpad and confirm all four visual checks. The live connection check must also succeed. If a tab is blocked, view the readiness report and contact your organizer."
+  exit 1
+fi

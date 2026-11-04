@@ -1,0 +1,49 @@
+body { background: var(--space-black); font-weight: 400; }
+.masthead { max-width: 1440px; margin: auto; padding: 24px 32px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); }
+main { max-width: 1440px; padding: 32px; margin: auto; }
+.intro { display: flex; gap: 32px; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+h1 { font-size: clamp(32px, 4vw, 56px); line-height: 1.08; letter-spacing: -.045em; font-weight: 400; margin: 12px 0 16px; }
+.intro .lede { max-width: 800px; font-size: 18px; }
+.eyebrow { font-size: 11px; }
+.muted { color: var(--slate-300); font-size: 13px; line-height: 1.6; }
+.flight-status { min-width: 195px; display: grid; gap: 10px; justify-items: start; font-size: 13px; }
+.count { font: 400 46px var(--font-mono); }
+.badge { font-size: 11px; padding: 7px 10px; color: var(--yellow); border-color: currentColor; }
+.badge[data-status="completed"] { color: var(--green); }
+.badge[data-status="failed"] { color: var(--red); }
+.check-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.check-card { padding: 18px; background: var(--space-black); border: 1px solid var(--border); min-width: 0; }
+.check-card[data-answer="yes"] { border-color: var(--green); }
+.check-card[data-answer="issue"] { border-color: var(--red); }
+.card-heading { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 14px; }
+.answer-label { font: 11px var(--font-mono); color: var(--slate-300); }
+[data-answer="yes"] > .card-heading .answer-label { color: var(--green); }
+[data-answer="issue"] > .card-heading .answer-label { color: var(--red); }
+.preview { height: 310px; background: #10131b; overflow: hidden; border: 1px solid var(--slate-500); }
+.preview iframe { width: 100%; height: 100%; border: 0; background: var(--space-black); }
+.check-card h2 { font-size: 20px; font-weight: 500; margin: 20px 0 8px; }
+.check-card > p { color: var(--slate-300); font-size: 14px; line-height: 1.5; min-height: 42px; margin: 0 0 16px; }
+.answers { display: flex; gap: 8px; flex-wrap: wrap; }
+.answers .button { min-height: 44px; font-size: 11px; }
+.button:disabled { opacity: .5; cursor: wait; }
+.button[aria-pressed="true"] { outline: 2px solid var(--green); outline-offset: 3px; }
+.button[data-answer="issue"][aria-pressed="true"] { outline-color: var(--red); }
+.terminal-instructions { height: 310px; padding: 24px; background: #10131b; border: 1px solid var(--slate-500); text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; }
+.terminal-instructions p { margin: 0; line-height: 1.7; font-size: 15px; }
+.terminal-icon { color: var(--green); font: 36px var(--font-mono); }
+code { color: var(--green); font: 13px var(--font-mono); overflow-wrap: anywhere; }
+.help { font-size: 14px; line-height: 1.7; margin-top: 18px; padding-top: 8px; border-top: 1px solid var(--border); }
+.clearance { border: 1px solid var(--green); padding: 24px; margin-top: 24px; background: linear-gradient(120deg, #122b25, var(--space-black)); }
+.clearance h2 { font-size: 26px; font-weight: 400; }
+footer { margin-top: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+.disclosure { font-size: 14px; line-height: 1.7; }
+.disclosure summary { min-height: 44px; }
+.error { color: var(--red); padding: 16px; border: 1px solid currentColor; line-height: 1.7; }
+#report-panel { margin-top: 24px; }
+#report { display: block; width: 100%; background: #10131b; color: var(--off-white); border: 1px solid var(--slate-300); padding: 16px; font: 12px/1.6 var(--font-mono); margin: 16px 0; resize: vertical; }
+#copy-status { margin-left: 12px; font-size: 13px; }
+[hidden] { display: none !important; }
+:focus-visible { outline: 3px solid var(--green); outline-offset: 4px; }
+@media (max-width: 900px) { main { padding: 24px 18px; } .masthead { padding: 18px; } .intro { align-items: start; } .check-grid { grid-template-columns: 1fr; } .preview, .terminal-instructions { height: 340px; } }
+@media (max-width: 560px) { .intro { flex-direction: column; gap: 16px; } .flight-status { grid-template-columns: auto 1fr; align-items: center; } .count { font-size: 30px; } footer { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }

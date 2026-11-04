@@ -1,0 +1,82 @@
+# --- Agent and AI-assistant planning files -----------------------------------
+# Kept out of demo repos by default (guide 00). If the demo itself uses one of
+# these files, re-include just that file below with a "!" line and say why in
+# the README's notes.
+.claude/
+CLAUDE.md
+CLAUDE.local.md
+.codex/
+AGENTS.md
+AGENTS.override.md
+.cursor/
+.cursorrules
+.cursorignore
+.windsurf/
+.windsurfrules
+.gemini/
+GEMINI.md
+.continue/
+.aider*
+.kiro/
+.roo/
+.roomodes
+.clinerules
+.cline/
+.junie/
+.amazonq/
+.specstory/
+.github/copilot-instructions.md
+.github/instructions/
+.github/prompts/
+memory-bank/
+/plans/
+/notes/
+# Re-include a file the demo needs, for example:
+# !AGENTS.md
+
+# --- Secrets and credentials -------------------------------------------------
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+kubeconfig
+*.kubeconfig
+
+# --- Local runtime state -----------------------------------------------------
+# .run/ holds logs, PIDs, and raw recordings from templates/booth and templates/recorder.
+.run/
+*.log
+*.db
+*.sqlite
+*.sqlite3
+
+# --- Recordings --------------------------------------------------------------
+# MP4s and raw takes go to Google Drive (guide 13). A README GIF under 10 MB may be committed.
+*.mp4
+*.mov
+*.webm
+*.mkv
+
+# --- Python ------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# --- Editors and OS ----------------------------------------------------------
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+._*
+Thumbs.db
+desktop.ini

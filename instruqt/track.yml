@@ -1,0 +1,32 @@
+slug: temporal-pre-flight
+title: Temporal pre-flight - Ziggy's launch clearance
+teaser: See Ziggy, the editor, a live terminal and Temporal. Four quick yeses before your webinar.
+description: |-
+  Check your webinar laptop and browser with Ziggy.
+
+  Everything starts automatically. Confirm that you can see the browser page,
+  code editor, live terminal output and Temporal UI. No installs, typing or coding.
+
+  Run this on the same laptop, browser and network you plan to use for the webinar.
+  If a page is blocked, get a short report to share with your organizer or IT team.
+icon: ""
+tags: [temporal, pre-flight, webinar]
+owner: temporal
+skipping_enabled: false
+idle_timeout: 600
+timelimit: 900
+lab_config:
+  sidebar_enabled: true
+  feedback_recap_enabled: false
+  feedback_tab_enabled: true
+  loadingMessages:
+  - Ziggy is opening the windows. The browser windows.
+  - Eight tiny boots. One quick systems check.
+  - Your editor and terminal are starting themselves.
+  theme:
+    name: modern-dark
+  override_challenge_layout: true
+  default_layout: AssignmentLeft
+  default_layout_sidebar_size: 25
+  hideStopButton: false
+enhanced_loading: false

@@ -1,0 +1,4 @@
+#!/bin/bash
+# Sandbox scripts cannot establish what a guest's browser can see.
+echo "This pre-flight requires real browser confirmations. Use a live learner play; instruqt track test cannot provide laptop readiness evidence." >&2
+exit 1

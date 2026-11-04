@@ -1,0 +1,4 @@
+#!/bin/bash
+# Instruqt destroys this guest's container and its ephemeral state.
+set -euo pipefail
+exit 0

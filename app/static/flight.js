@@ -1,0 +1,161 @@
+/* Real pages load in the guest's browser; confirmations describe what the guest sees. */
+(() => {
+  "use strict";
+  let token, socket, retryTimer, echoTimer, reconnects = 0, stopped = false;
+  let renderedRevision = -1;
+  const error = document.getElementById("error");
+  const connection = document.getElementById("connection");
+  const storageKey = `temporal-preflight:${location.host}`;
+
+  function serviceUrl(port, path = "/") {
+    const url = new URL(location.href);
+    // Instruqt documents host-port[u|s]-participant.env.play.instruqt.com.
+    if (/^workshop-5000[us]?-.+\.env\.play\.instruqt\.com$/.test(url.hostname)) {
+      url.hostname = url.hostname.replace(/^workshop-5000[us]?-/, `workshop-${port}-`);
+    } else if (["localhost", "127.0.0.1", "[::1]"].includes(url.hostname)) {
+      url.port = String(port);
+    } else {
+      throw new Error("This preview URL is not an Instruqt sandbox or local preview. Open the native Instruqt tabs.");
+    }
+    url.pathname = path;
+    url.search = "";
+    url.hash = "";
+    return url;
+  }
+
+  function showError(message) { error.hidden = false; error.textContent = message; }
+
+  async function api(path, body) {
+    const response = await fetch(path, {
+      method: body === undefined ? "GET" : "POST",
+      headers: { "Content-Type": "application/json", ...(token ? {"X-Flight-Session": token} : {}) },
+      body: body === undefined ? undefined : JSON.stringify(body),
+      signal: AbortSignal.timeout(8000), cache: "no-store"
+    });
+    if (!response.ok) {
+      const failure = new Error("Launchpad could not save your answer. Check your connection and reload this page to try again.");
+      failure.status = response.status;
+      throw failure;
+    }
+    return path === "/api/report" ? response.text() : response.json();
+  }
+
+  function render(state) {
+    if (state.revision < renderedRevision) return;
+    renderedRevision = state.revision;
+    let count = 0;
+    for (const [key, value] of Object.entries(state.checks)) {
+      const card = document.querySelector(`[data-check="${key}"]`);
+      card.dataset.answer = value;
+      card.querySelector(".answer-label").textContent = value === "yes" ? "✓ Confirmed" : value === "issue" ? "! Needs a hand" : "Take a look";
+      card.querySelector(".help").hidden = value !== "issue";
+      for (const button of card.querySelectorAll("[data-answer]")) button.setAttribute("aria-pressed", String(button.dataset.answer === value));
+      if (value === "yes") count++;
+    }
+    document.getElementById("counter").textContent = `${count} / 4`;
+    document.getElementById("summary").textContent = state.completed_at ? "Clear for launch" : "visual checks confirmed";
+    document.getElementById("clearance").hidden = !state.completed_at;
+  }
+
+  function connectionStatus(text, status) { connection.textContent = text; connection.dataset.status = status; }
+
+  function connect() {
+    clearTimeout(echoTimer);
+    const url = new URL("/ws", location.href);
+    url.protocol = url.protocol === "https:" ? "wss:" : "ws:";
+    connectionStatus("Checking live connection…", "waiting");
+    socket = new WebSocket(url);
+    const timeout = setTimeout(() => socket.close(), 6000);
+    let watchdog;
+    socket.onopen = () => socket.send(JSON.stringify({session: token}));
+    socket.onmessage = event => {
+      const state = JSON.parse(event.data);
+      clearTimeout(echoTimer);
+      clearTimeout(watchdog);
+      watchdog = setTimeout(() => socket.close(), 12000);
+      if (state.connection) {
+        clearTimeout(timeout);
+        reconnects = 0;
+        connectionStatus("✓ Live connection works", "completed");
+        render(state);
+        // Keep the connection exercised while the guest looks at the other tabs.
+        echoTimer = setTimeout(() => {
+          if (socket.readyState === WebSocket.OPEN) socket.send(JSON.stringify({echo: state.nonce}));
+        }, 3000);
+      } else {
+        socket.send(JSON.stringify({echo: state.nonce}));
+      }
+    };
+    socket.onerror = () => socket.close();
+    socket.onclose = () => {
+      clearTimeout(timeout);
+      clearTimeout(watchdog);
+      clearTimeout(echoTimer);
+      connectionStatus("! Live connection interrupted", "failed");
+      if (!stopped && reconnects++ < 3) retryTimer = setTimeout(connect, 2000);
+      else if (!stopped) showError("The live connection is blocked or unavailable. Your IT team may need to allow secure WebSockets to Instruqt. You can still view your readiness report below. Reload Launchpad after the issue is resolved.");
+    };
+  }
+
+  document.querySelectorAll(".answers button").forEach(button => button.addEventListener("click", async () => {
+    const card = button.closest("[data-check]");
+    const buttons = card.querySelectorAll("button");
+    buttons.forEach(item => item.disabled = true);
+    button.textContent = "Saving…";
+    try {
+      render(await api("/api/confirm", {check: card.dataset.check, value: button.dataset.answer}));
+      document.getElementById("report-panel").hidden = true;
+      error.hidden = true;
+    } catch (err) { showError(err.message); }
+    finally { buttons.forEach(item => item.disabled = false); button.textContent = button.dataset.label; }
+  }));
+
+  document.getElementById("report-button").addEventListener("click", async () => {
+    try {
+      document.getElementById("report").value = await api("/api/report");
+      document.getElementById("report-panel").hidden = false;
+      document.getElementById("report").focus();
+    } catch (err) { showError(err.message); }
+  });
+  document.getElementById("copy-report").addEventListener("click", async () => {
+    const report = document.getElementById("report");
+    try {
+      await navigator.clipboard.writeText(report.value);
+      document.getElementById("copy-status").textContent = "Copied.";
+    } catch (_) {
+      report.focus(); report.select();
+      document.getElementById("copy-status").textContent = "Copy is restricted. Use your browser’s Copy command on the selected text.";
+    }
+  });
+  window.addEventListener("pagehide", () => { stopped = true; clearTimeout(retryTimer); clearTimeout(echoTimer); socket?.close(); });
+
+  async function start() {
+    document.querySelectorAll(".answers button").forEach(button => button.dataset.label = button.textContent);
+    // Load independent surfaces immediately, alongside the readiness session request.
+    try {
+      document.getElementById("ziggy-frame").src = serviceUrl(8090, "/ziggy");
+      // Exercise the second architecture-page port too; the guest sees one Ziggy card.
+      const image = document.createElement("img");
+      image.alt = ""; image.hidden = true;
+      image.src = serviceUrl(8092, "/assets/brand/ziggy-peek.png");
+      document.body.append(image);
+      const editor = serviceUrl(8080);
+      editor.searchParams.set("folder", "/root/preflight");
+      document.getElementById("editor-frame").src = editor;
+      document.getElementById("temporal-frame").src = serviceUrl(8233, "/namespaces/default/workflows");
+    } catch (err) { showError(err.message); }
+    try { token = sessionStorage.getItem(storageKey); } catch (_) { /* Storage is optional. */ }
+    try {
+      let state;
+      try { state = await api("/api/session", {}); }
+      catch (err) { if (!token || err.status !== 404) throw err; token = null; state = await api("/api/session", {}); }
+      token = state.session;
+      try { sessionStorage.setItem(storageKey, token); } catch (_) { /* Keep this flight in memory. */ }
+      render(state);
+      document.querySelectorAll(".answers button, #report-button").forEach(button => button.disabled = false);
+      connect();
+    } catch (err) { showError(err.message); }
+
+  }
+  start();
+})();

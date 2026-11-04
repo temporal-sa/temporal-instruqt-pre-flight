@@ -1,0 +1,24 @@
+services:
+  sandbox:
+    image: temporal-instruqt-pre-flight:local
+    build:
+      context: .
+      dockerfile: instruqt/docker/Dockerfile
+    command: ["/opt/venv/bin/python", "/opt/preflight/supervise.py"]
+    ports:
+      - "127.0.0.1:5000:5000"
+      - "127.0.0.1:8080:8080"
+      - "127.0.0.1:8090:8090"
+      - "127.0.0.1:8092:8092"
+      - "127.0.0.1:8233:8233"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://127.0.0.1:5000/healthz && curl -fsS -o /dev/null http://127.0.0.1:8080/ && curl -fsS -o /dev/null http://127.0.0.1:8233/"]
+      interval: 5s
+      timeout: 10s
+      retries: 24
+      start_period: 15s
+  test:
+    profiles: [test]
+    build:
+      context: .
+      dockerfile: tests/Dockerfile

@@ -1,0 +1,9 @@
+version: "3"
+containers:
+- name: workshop
+  # Fieldkit replaces this tag with its built, public sandbox image.
+  # Direct Instruqt publishing needs a pushed, pullable image here first.
+  image: temporal-instruqt-pre-flight:local
+  shell: /bin/bash
+  memory: 4096
+  ports: [5000, 8080, 8090, 8092, 8233]

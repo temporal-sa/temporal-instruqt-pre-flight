@@ -1,0 +1,33 @@
+# Draft for temporal-fieldkit-platform. Publish the source repo before adding this
+# to projects/test/instruqt/. This file deploys nothing from this workspace.
+apiVersion: registry.tmprl-demo.cloud/v1alpha1
+kind: InstruqtCourse
+metadata:
+  name: temporal-pre-flight
+  annotations:
+    registry.tmprl-demo.cloud/operator: v2
+spec:
+  source:
+    repo: https://github.com/temporal-sa/temporal-instruqt-pre-flight
+    branch: main
+    path: instruqt
+  images:
+    workshop:
+      container: workshop
+      context:
+        source: source
+        path: .
+      dockerfile:
+        source: source
+        path: instruqt/docker/Dockerfile
+      platform: linux/amd64
+  track:
+    organization: temporal
+    slug: temporal-pre-flight
+  catalog:
+    title: Temporal pre-flight
+    summary: Check that your webinar laptop can display Ziggy, the code editor, live terminal output and Temporal UI. Everything starts automatically. Confirm what you see or get help with a blocked tab.
+    tags: [Pre-flight, Webinar, Getting started]
+    duration:
+      minHours: 0.005
+      maxHours: 0.017

@@ -1,0 +1,14 @@
+.git
+.env*
+.claude
+.codex
+.agents
+AGENTS.md
+CLAUDE.md
+__pycache__
+.venv
+.pytest_cache
+.DS_Store
+*.log
+*.sqlite*
+*.db*
