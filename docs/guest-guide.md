@@ -1,8 +1,12 @@
-# Pre-flight check for your Temporal webinar
+# Pre-flight check for your Temporal workshop
 
-Open the pre-flight invite supplied by your webinar organizer on the same laptop, browser and network you plan to use during the event. Keep your usual company VPN connected if your organization requires it.
+Open the pre-flight invite supplied by your workshop organizer on the same laptop, browser and network you plan to use during the event. Keep your usual company VPN connected if your organization requires it.
 
-This Instruqt pre-flight challenge helps validate that you are able to access the webinar content. If you are not able to access the content, we suggest joining from a personal machine rather than a work machine.
+The environment can take about a minute to start. If it is still loading after a few minutes, let your organizer know.
+
+Instruqt is the browser-based lab platform we use for the hands-on portion of the workshop. You will work in a code editor, terminal and the Temporal UI right in your browser, with nothing to install.
+
+This pre-flight check confirms you can access the hands-on lab content from this computer, browser and network. If you cannot, we suggest joining from a personal machine rather than a work machine.
 
 After the sandbox is created, the **Launchpad** tab walks you through four steps, one at a time: a browser image, the code editor, the terminal and the Temporal UI. In the terminal step you open the **Terminal** tab, look for **ZIGGY ONLINE** and a ticking clock, then return to Launchpad. When the results page appears, click **Check** to finish. You do not need to install anything, type commands, edit files or provide an API key.
 
@@ -10,7 +14,7 @@ If a preview is blank, try its full-size tab. Answer "No" for anything that stay
 
 ## If you cannot open the invite or Launchpad
 
-Send this to your webinar organizer using the event’s normal contact channel:
+Send this to your workshop organizer using the event’s normal contact channel:
 
 > I could not complete the Temporal pre-flight.
 > The failing page/tab is: ____.
@@ -24,4 +28,4 @@ Do not include passwords, API keys or unrelated company information. Ask IT to r
 
 Use a current, organization-approved browser. Keep company security controls enabled. Your IT team or organizer can help arrange an approved alternative setup.
 
-A successful pre-flight means you could see the prepared tools at that time. The webinar will exercise typing, editing and the workshop itself.
+A successful pre-flight means you could see the prepared tools at that time. The workshop will exercise typing, editing and the lab exercises themselves.

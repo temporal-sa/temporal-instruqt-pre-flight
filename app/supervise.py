@@ -23,7 +23,7 @@ workspace.mkdir(parents=True, exist_ok=True)
     "Return to Launchpad and choose **Yes, editor’s here**.\n"
 )
 (workspace / "hello_temporal.py").write_text(
-    '# Your webinar code will appear in an editor like this.\n'
+    '# Your workshop code will appear in an editor like this.\n'
     '# There is nothing to run during pre-flight.\n\n'
     'message = "Hello from Temporal. Ready when you are!"\nprint(message)\n'
 )

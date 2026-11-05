@@ -139,11 +139,11 @@ async def report(request):
         "",
         f"Browser WebSocket round trip observed: {'yes' if data.get('last_echo') else 'no'}",
         "This is a point-in-time visual check for this browser, laptop and network.",
-        "Typing, editing, clipboard access, long-lived sessions, LLMs and webinar services were not tested.",
+        "Typing, editing, clipboard access, long-lived sessions, LLMs and workshop services were not tested.",
         "",
-        "If blocked, send this report and the affected tab name to your webinar organizer.",
+        "If blocked, send this report and the affected tab name to your workshop organizer.",
         "Ask IT to review https://docs.instruqt.com/reference/platform/third-party-network-access",
-        "If you cannot access the content, join the webinar from a personal machine rather than a work machine.",
+        "If you cannot access the hands-on lab content, join the workshop from a personal machine rather than a work machine.",
     ]
     return web.Response(text="\n".join(lines), content_type="text/plain")
 
@@ -196,7 +196,7 @@ def make_app(db_path=None):
 async def main():
     runner = web.AppRunner(make_app(), access_log=None)
     await runner.setup()
-    # Match all three ordinary web-app ports in the webinar, as well as its editor and UI.
+    # Match all three ordinary web-app ports in the workshop, as well as its editor and UI.
     for port in (5000, 8090, 8092):
         await web.TCPSite(runner, "0.0.0.0", port).start()
     try:

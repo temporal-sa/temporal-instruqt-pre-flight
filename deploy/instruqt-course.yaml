@@ -26,8 +26,8 @@ spec:
     slug: temporal-pre-flight
   catalog:
     title: Temporal pre-flight
-    summary: Check that your webinar laptop can display Ziggy, the code editor, live terminal output and Temporal UI. Everything starts automatically. Confirm what you see or get help with a blocked tab.
-    tags: [Pre-flight, Webinar, Getting started]
+    summary: Check that your workshop laptop can display Ziggy, the code editor, live terminal output and Temporal UI. Everything starts automatically. Confirm what you see or get help with a blocked tab.
+    tags: [Pre-flight, Workshop, Getting started]
     duration:
       minHours: 0.005
       maxHours: 0.017

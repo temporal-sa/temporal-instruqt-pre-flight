@@ -1,6 +1,6 @@
 # Temporal pre-flight
 
-Check that a guest’s webinar laptop can display Ziggy, the code editor, live terminal output and Temporal UI. Everything starts automatically; the guest just confirms what they see.
+Check that a guest’s workshop laptop can display Ziggy, the code editor, live terminal output and Temporal UI. Everything starts automatically; the guest just confirms what they see.
 
 The course has one challenge. Launchpad is a step-by-step wizard: an introduction, four one-at-a-time visual confirmations (browser image, editor, terminal, Temporal UI) and a results page. It also checks a browser WebSocket round trip. A blocked page gets specific help and a readiness report the guest can copy to their organizer.
 
@@ -35,7 +35,7 @@ Setup, reset and event checks: [RUNBOOK.md](RUNBOOK.md). Research and the corpor
 
 ## Scope and notes
 
-This is a point-in-time visual check on the browser and network used for the pre-flight. It does not verify typing, editing, clipboard permissions, long-lived connections, LLM calls, webinar secrets, or the workshop exercises. An empty Temporal Workflow list is expected.
+This is a point-in-time visual check on the browser and network used for the pre-flight. It does not verify typing, editing, clipboard permissions, long-lived connections, LLM calls, workshop secrets, or the lab exercises. An empty Temporal Workflow list is expected.
 
 The container exposes the same five application ports as the inspected AI Agents Webinar. Its browser/editor/terminal surfaces exercise the same kinds of access; it does not contain the AI workshop runtime.
 

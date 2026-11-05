@@ -1,18 +1,25 @@
 slug: temporal-pre-flight
-title: Temporal webinar pre-flight check
-teaser: Confirm you can access the webinar content before the event.
+title: Temporal workshop pre-flight check
+teaser: Confirm you can access the hands-on lab content before the workshop.
 description: |-
-  This Instruqt pre-flight challenge helps validate that you are able to access
-  the webinar content. If you are not able to access the content, we suggest
-  joining from a personal machine rather than a work machine.
+  Instruqt is the browser-based lab platform we use for the hands-on portion of
+  the workshop. You will work in a code editor, terminal and the Temporal UI
+  right in your browser, with nothing to install.
+
+  This pre-flight check confirms you can access the hands-on lab content from
+  this computer, browser and network. If you cannot, we suggest joining from a
+  personal machine rather than a work machine.
 
   Four short steps: confirm you can see a browser page, the code editor, live
   terminal output and the Temporal UI. No installs, typing or coding.
 
-  Run this on the same laptop, browser and network you plan to use for the webinar.
+  The environment can take about a minute to start. If it is still loading after
+  a few minutes, let your workshop organizer know.
+
+  Run this on the same laptop, browser and network you plan to use for the workshop.
   If a page is blocked, get a short report to share with your organizer or IT team.
 icon: ""
-tags: [temporal, pre-flight, webinar]
+tags: [temporal, pre-flight, workshop]
 owner: temporal
 skipping_enabled: false
 idle_timeout: 600
@@ -22,6 +29,7 @@ lab_config:
   feedback_recap_enabled: false
   feedback_tab_enabled: true
   loadingMessages:
+  - The environment can take about a minute to start.
   - Ziggy is opening the windows. The browser windows.
   - Eight tiny boots. One quick systems check.
   - Your editor and terminal are starting themselves.

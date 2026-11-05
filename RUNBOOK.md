@@ -1,10 +1,10 @@
 # Runbook: Temporal pre-flight
 
-Give guests a quick way to spot blocked browser tools before the webinar. The target is a few seconds of looking and clicking once the sandbox is ready.
+Give guests a quick way to spot blocked browser tools before the workshop. The target is a few seconds of looking and clicking once the sandbox is ready.
 
 ## Before you start
 
-Use the same invite/access mode planned for the webinar. The guest should use the same work laptop, browser, VPN and network they expect to use on the day. The invite must reach them before the event, while IT still has time to help.
+Use the same invite/access mode planned for the workshop. The guest should use the same work laptop, browser, VPN and network they expect to use on the day. The invite must reach them before the event, while IT still has time to help.
 
 The source repository and track are not registered yet. The draft Fieldkit resource is [deploy/instruqt-course.yaml](deploy/instruqt-course.yaml). Check its source URL and branch before adding it to `projects/test/instruqt/` in `temporal-fieldkit-platform`.
 
@@ -48,7 +48,7 @@ Keep company security controls enabled. Do not ask guests to turn off certificat
 
 ## Share before the event
 
-Send [docs/guest-guide.md](docs/guest-guide.md) alongside the actual course invite. It includes the network-requirements link and a fallback message for guests who cannot open Instruqt at all. Set the organizer contact in the invitation; this repository has no assumed support email.
+Send [docs/guest-guide.md](docs/guest-guide.md) alongside the actual course invite. It includes the network-requirements link and a fallback message for guests who cannot open Instruqt at all. Set the organizer contact in the invitation; this repository has no assumed support email. Add this line to the invite description, because a guest behind a firewall can mistake the first load for a hang: "The environment can take about a minute to start."
 
 ## Run it locally
 
