@@ -2,7 +2,7 @@
 <html lang="en" class="launchpad-page">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Ziggy’s launch clearance · Temporal pre-flight</title>
+  <title>Instruqt pre-flight check · Temporal</title>
   <link rel="stylesheet" href="/assets/css/temporal-theme.css">
   <link rel="stylesheet" href="/assets/css/temporal-components.css">
   <link rel="stylesheet" href="/static/flight.css">
@@ -12,65 +12,97 @@
 </head>
 <body>
   <canvas id="stars" aria-hidden="true"></canvas>
-  <header class="masthead"><img src="/assets/brand/temporal-logo.svg" alt="Temporal" width="134" height="28"><div class="masthead-actions"><button id="motion-toggle" type="button" class="button ghost off-white small" aria-pressed="false">Pause animation</button><span class="eyebrow">Pre-flight / 01</span></div></header>
+  <header class="masthead"><img src="/assets/brand/temporal-logo.svg" alt="Temporal" width="134" height="28"><div class="masthead-actions"><span id="connection" class="badge" data-status="waiting">Connecting…</span><button id="motion-toggle" type="button" class="button ghost off-white small" aria-pressed="false">Pause animation</button></div></header>
   <main>
-    <section class="intro">
-      <div><p class="eyebrow">A small check before a big idea</p>
-        <h1>Ziggy’s <span class="text-gradient-green">launch clearance.</span></h1>
-        <p class="lede">Everything starts for you. Take a look and check off your browser setup with four quick yeses.</p>
-        <p class="muted">Use the laptop, browser and network you’ll use on the day. No installs. No commands.</p>
-      </div>
-      <aside class="flight-status" aria-live="polite"><span id="counter" class="count">0 / 4</span><span id="summary">visual checks confirmed</span><span id="connection" class="badge" data-status="waiting">Connecting…</span></aside>
-    </section>
-
     <p id="error" class="error" role="alert" hidden></p>
-    <noscript><p class="error">JavaScript is blocked. The check cannot run. Ask your organizer or IT team for help using Instruqt.</p></noscript>
+    <noscript><p class="error">JavaScript is blocked, so this check cannot run. Please tell your webinar organizer.</p></noscript>
 
-    <section class="check-grid" aria-label="Four quick visual checks">
-      <article class="check-card" data-check="ziggy">
-        <div class="card-heading"><span class="eyebrow">01 / Browser</span><span class="answer-label">Take a look</span></div>
-        <div class="preview ziggy-preview"><iframe id="ziggy-frame" title="Ziggy in the browser" loading="eager"></iframe></div>
-        <h2>Can you see Ziggy?</h2><p>The little space explorer should appear above.</p>
-        <div class="answers" role="group" aria-label="Can you see Ziggy?"><button type="button" class="button secondary green small" data-answer="yes" aria-pressed="false" disabled>Yes, there’s Ziggy</button><button type="button" class="button ghost off-white small" data-answer="issue" aria-pressed="false" disabled>Something’s missing</button></div>
-        <div class="help" hidden><p>A blank frame or missing image can mean a blocked sandbox page or asset. Try the <strong>Browser</strong> tab. If it also fails, save the report below and ask IT to review Instruqt’s sandbox domains.</p></div>
-      </article>
+    <nav id="progress" class="progress" aria-label="Progress" hidden>
+      <ol>
+        <li data-dot="ziggy"><span>1</span>Browser</li>
+        <li data-dot="editor"><span>2</span>Editor</li>
+        <li data-dot="terminal"><span>3</span>Terminal</li>
+        <li data-dot="temporal"><span>4</span>Temporal UI</li>
+      </ol>
+    </nav>
 
-      <article class="check-card" data-check="editor">
-        <div class="card-heading"><span class="eyebrow">02 / Editor</span><span class="answer-label">Take a look</span></div>
-        <div class="preview"><iframe id="editor-frame" title="Live code editor" loading="eager" allow="clipboard-read; clipboard-write"></iframe></div>
-        <h2>Can you see the code editor?</h2><p>Look for the file list and an open welcome file.</p>
-        <div class="answers" role="group" aria-label="Can you see the code editor?"><button type="button" class="button secondary green small" data-answer="yes" aria-pressed="false" disabled>Yes, editor’s here</button><button type="button" class="button ghost off-white small" data-answer="issue" aria-pressed="false" disabled>Blank or blocked</button></div>
-        <div class="help" hidden><p>Try the full-size <strong>Editor</strong> tab. If it works there, you can confirm this check. If it stays blank or keeps reconnecting, ask IT to review secure WebSockets and sandbox access. Loading the frame alone does not prove the editor works.</p></div>
-      </article>
-
-      <article class="check-card" data-check="terminal">
-        <div class="card-heading"><span class="eyebrow">03 / Terminal</span><span class="answer-label">Take a look</span></div>
-        <div class="terminal-instructions"><span class="terminal-icon" aria-hidden="true">&gt;_</span><p>Open the <strong>Terminal</strong> tab above.</p><p>It starts automatically. Look for<br><code>ZIGGY ONLINE</code><br>and a ticking radio clock.</p><span class="muted">Come back here to confirm. No typing needed.</span></div>
-        <h2>Can you see the live terminal?</h2><p>The clock should change every second.</p>
-        <div class="answers" role="group" aria-label="Can you see the live terminal?"><button type="button" class="button secondary green small" data-answer="yes" aria-pressed="false" disabled>Yes, clock’s ticking</button><button type="button" class="button ghost off-white small" data-answer="issue" aria-pressed="false" disabled>Blank or frozen</button></div>
-        <div class="help" hidden><p>If the terminal stays blank or the clock stops, the live connection may be blocked. Tell your organizer the terminal failed. Your IT team may need to allow <code>wss://*.env.play.instruqt.com</code> on port 443.</p></div>
-      </article>
-
-      <article class="check-card" data-check="temporal">
-        <div class="card-heading"><span class="eyebrow">04 / Temporal</span><span class="answer-label">Take a look</span></div>
-        <div class="preview"><iframe id="temporal-frame" title="Live Temporal UI" loading="eager"></iframe></div>
-        <h2>Can you see the Temporal UI?</h2><p>Look for its navigation and Workflows page. An empty list is expected.</p>
-        <div class="answers" role="group" aria-label="Can you see the Temporal UI?"><button type="button" class="button secondary green small" data-answer="yes" aria-pressed="false" disabled>Yes, Temporal’s here</button><button type="button" class="button ghost off-white small" data-answer="issue" aria-pressed="false" disabled>Blank or blocked</button></div>
-        <div class="help" hidden><p>Try the full-size <strong>Temporal UI</strong> tab. Confirm only when you see the application, rather than a login page, error, or loading spinner. If it fails in both places, save the report and contact your organizer.</p></div>
-      </article>
+    <section class="step" data-step="intro">
+      <p class="eyebrow">Instruqt pre-flight check</p>
+      <h1>Check your access to the <span class="text-gradient-green">webinar content.</span></h1>
+      <p class="lede">This Instruqt pre-flight challenge helps validate that you are able to access the webinar content.</p>
+      <p class="lede">If you are not able to access the content, we suggest joining from a personal machine rather than a work machine.</p>
+      <div class="note">
+        <h2>How this works</h2>
+        <ul>
+          <li>There are <strong>4 short steps</strong>. Each one shows you something and asks whether you can see it. It takes about two minutes.</li>
+          <li>Please use the same computer, browser and network you plan to use for the webinar.</li>
+          <li>You do not need to install anything or type any commands.</li>
+          <li>The tabs along the top of the Instruqt screen (<strong>Launchpad</strong>, <strong>Terminal</strong>, <strong>Editor</strong>, <strong>Browser</strong>, <strong>Temporal UI</strong>) are different views of the same environment. Stay on <strong>Launchpad</strong> unless a step tells you to open another tab.</li>
+        </ul>
+      </div>
+      <div class="nav"><button id="start" type="button" class="button primary green" disabled>Start</button></div>
     </section>
 
-    <section id="clearance" class="clearance" aria-live="polite" hidden>
-      <p class="eyebrow">Clear for launch</p><h2>All four sights. Eight tiny thumbs up.</h2>
-      <p>Your visual checks are complete. Click <strong>Check</strong> in Instruqt to finish.</p>
-      <p class="muted">This confirms what you can see right now. You’ll run the workshop exercises during the webinar.</p>
+    <section class="step" data-step="ziggy" data-check="ziggy" hidden>
+      <p class="eyebrow">Step 1 of 4 · Browser</p>
+      <h1>Can you see the image below?</h1>
+      <p class="lede">You should see a small illustrated space explorer named Ziggy.</p>
+      <div class="preview"><iframe id="ziggy-frame" title="Ziggy image preview"></iframe></div>
+      <div class="answers" role="group" aria-label="Can you see the image?"><button type="button" class="button secondary green" data-answer="yes" aria-pressed="false" disabled>Yes, I can see it</button><button type="button" class="button ghost off-white" data-answer="issue" aria-pressed="false" disabled>No, it is blank or missing</button></div>
+      <div class="help" hidden><p>A blank frame usually means a work network or browser policy is blocking the page. Open the <strong>Browser</strong> tab at the top of the screen to try again at full size. If it is still blank, continue to the next step. Your report will list this as a problem to share with your organizer.</p></div>
+      <div class="nav"><button type="button" class="button ghost off-white" data-back>Back</button><button type="button" class="button secondary ultraviolet" data-next hidden>Continue</button></div>
     </section>
 
-    <footer>
-      <div><button id="report-button" class="button secondary ultraviolet small" type="button" disabled>View readiness report</button><p class="muted">Something blocked? Share the report with your organizer.</p></div>
-      <details class="disclosure"><summary>Need a hand?</summary><p>Try the full-size Instruqt tabs if a preview is cramped or blank. Use a current browser approved by your organization. If a company filter or policy blocks access, ask IT for help or use an approved alternative laptop or network.</p><p>Keep company security controls enabled. <a href="https://docs.instruqt.com/reference/platform/third-party-network-access" target="_blank" rel="noopener noreferrer">Instruqt network requirements ↗</a></p></details>
-    </footer>
-    <section id="report-panel" hidden aria-labelledby="report-title"><h2 id="report-title">Your readiness report</h2><p>Select and copy the text to share it. It contains your answers and a random reference, with no personal details.</p><textarea id="report" readonly rows="16" aria-label="Readiness report"></textarea><button id="copy-report" class="button secondary green small" type="button">Copy report</button><span id="copy-status" role="status"></span></section>
+    <section class="step" data-step="editor" data-check="editor" hidden>
+      <p class="eyebrow">Step 2 of 4 · Editor</p>
+      <h1>Can you see the code editor below?</h1>
+      <p class="lede">You should see a file list on the left and a welcome file open on the right.</p>
+      <div class="preview"><iframe id="editor-frame" title="Live code editor" allow="clipboard-read; clipboard-write"></iframe></div>
+      <div class="answers" role="group" aria-label="Can you see the code editor?"><button type="button" class="button secondary green" data-answer="yes" aria-pressed="false" disabled>Yes, I can see it</button><button type="button" class="button ghost off-white" data-answer="issue" aria-pressed="false" disabled>No, it is blank or an error</button></div>
+      <div class="help" hidden><p>Open the <strong>Editor</strong> tab at the top of the screen to try it at full size. If it works there, return to <strong>Launchpad</strong> and answer yes. If it stays blank or keeps reconnecting, continue to the next step. Your IT team may need to allow secure WebSockets and Instruqt sandbox access.</p></div>
+      <div class="nav"><button type="button" class="button ghost off-white" data-back>Back</button><button type="button" class="button secondary ultraviolet" data-next hidden>Continue</button></div>
+    </section>
+
+    <section class="step" data-step="terminal" data-check="terminal" hidden>
+      <p class="eyebrow">Step 3 of 4 · Terminal</p>
+      <h1>Check the terminal tab.</h1>
+      <p class="lede">The terminal is a separate tab, so this step takes you away from Launchpad for a moment.</p>
+      <ol class="instructions">
+        <li>Click the <strong>Terminal</strong> tab at the top of the Instruqt screen.</li>
+        <li>Look for the text <code>ZIGGY ONLINE</code> and a clock that changes every second. You do not need to type anything.</li>
+        <li>Click the <strong>Launchpad</strong> tab to come back here and answer below.</li>
+      </ol>
+      <h2>Did the terminal show a ticking clock?</h2>
+      <div class="answers" role="group" aria-label="Did the terminal show a ticking clock?"><button type="button" class="button secondary green" data-answer="yes" aria-pressed="false" disabled>Yes, the clock was ticking</button><button type="button" class="button ghost off-white" data-answer="issue" aria-pressed="false" disabled>No, it was blank or frozen</button></div>
+      <div class="help" hidden><p>If the terminal stays blank or the clock stops, the live connection may be blocked. Your IT team may need to allow <code>wss://*.env.play.instruqt.com</code> on port 443. Continue to the next step and share the report with your organizer.</p></div>
+      <div class="nav"><button type="button" class="button ghost off-white" data-back>Back</button><button type="button" class="button secondary ultraviolet" data-next hidden>Continue</button></div>
+    </section>
+
+    <section class="step" data-step="temporal" data-check="temporal" hidden>
+      <p class="eyebrow">Step 4 of 4 · Temporal UI</p>
+      <h1>Can you see the Temporal UI below?</h1>
+      <p class="lede">You should see a navigation menu and a Workflows page. An empty list is expected.</p>
+      <div class="preview"><iframe id="temporal-frame" title="Live Temporal UI"></iframe></div>
+      <div class="answers" role="group" aria-label="Can you see the Temporal UI?"><button type="button" class="button secondary green" data-answer="yes" aria-pressed="false" disabled>Yes, I can see it</button><button type="button" class="button ghost off-white" data-answer="issue" aria-pressed="false" disabled>No, it is blank or an error</button></div>
+      <div class="help" hidden><p>Open the <strong>Temporal UI</strong> tab at the top of the screen to try it at full size. Answer yes only if you see the application itself, not a login page, error or loading spinner. If it fails there too, continue and share the report with your organizer.</p></div>
+      <div class="nav"><button type="button" class="button ghost off-white" data-back>Back</button><button type="button" class="button secondary ultraviolet" data-next hidden>Finish</button></div>
+    </section>
+
+    <section class="step" data-step="done" hidden>
+      <p class="eyebrow">Results</p>
+      <h1 id="done-title">All done.</h1>
+      <ul id="results" class="results"></ul>
+      <div id="done-pass" class="note pass" hidden>
+        <h2>You are ready</h2>
+        <p>Click <strong>Check</strong> at the bottom right of the Instruqt screen to finish. This confirms what you could see just now. You will do the workshop exercises during the webinar.</p>
+      </div>
+      <div id="done-fail" class="note fail" hidden>
+        <h2>Some content was not accessible</h2>
+        <p>We suggest joining the webinar from a personal machine rather than a work machine. If you need to use this machine, share the report below with your organizer and ask your IT team to review the <a href="https://docs.instruqt.com/reference/platform/third-party-network-access" target="_blank" rel="noopener noreferrer">Instruqt network requirements ↗</a>.</p>
+      </div>
+      <div class="nav"><button type="button" class="button ghost off-white" data-back>Back</button><button id="report-button" class="button secondary ultraviolet" type="button" disabled>View report to share</button><button id="restart" type="button" class="button ghost off-white">Start over</button></div>
+      <section id="report-panel" hidden aria-labelledby="report-title"><h2 id="report-title">Your report</h2><p>Select and copy this text to share it. It contains your answers and a random reference, with no personal details.</p><textarea id="report" readonly rows="16" aria-label="Report"></textarea><button id="copy-report" class="button secondary green small" type="button">Copy report</button><span id="copy-status" role="status"></span></section>
+    </section>
   </main>
 </body>
 </html>

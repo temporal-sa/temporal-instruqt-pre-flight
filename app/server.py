@@ -126,12 +126,12 @@ async def completion(request):
 async def report(request):
     data = read_session(request.app[DB_KEY], request.headers.get("X-Flight-Session", ""))
     lines = [
-        "Temporal pre-flight | Ziggy's launch clearance",
+        "Temporal Instruqt pre-flight check",
         f"Reference: {data['reference']}",
-        f"Result: {'VISUAL CHECKS COMPLETE' if data.get('completed_at') else 'NEEDS ATTENTION / INCOMPLETE'}",
+        f"Result: {'ALL CHECKS PASSED' if data.get('completed_at') else 'NEEDS ATTENTION / INCOMPLETE'}",
         f"Completed (UTC): {data.get('completed_at', 'Not completed')}",
         "",
-        "Guest visual confirmations:",
+        "Your answers:",
     ]
     for key, title in CHECKS.items():
         lines.append(f"- {title}: {data['checks'][key]}")
@@ -143,7 +143,7 @@ async def report(request):
         "",
         "If blocked, send this report and the affected tab name to your webinar organizer.",
         "Ask IT to review https://docs.instruqt.com/reference/platform/third-party-network-access",
-        "Keep company security controls enabled; use only an IT-approved alternative setup.",
+        "If you cannot access the content, join the webinar from a personal machine rather than a work machine.",
     ]
     return web.Response(text="\n".join(lines), content_type="text/plain")
 

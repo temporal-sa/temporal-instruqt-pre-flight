@@ -33,28 +33,75 @@
       signal: AbortSignal.timeout(8000), cache: "no-store"
     });
     if (!response.ok) {
-      const failure = new Error("Launchpad could not save your answer. Check your connection and reload this page to try again.");
+      const failure = new Error("The check could not save your answer. Check your connection and reload this page to try again.");
       failure.status = response.status;
       throw failure;
     }
     return path === "/api/report" ? response.text() : response.json();
   }
 
+  const ORDER = ["ziggy", "editor", "terminal", "temporal"];
+  const NAMES = {ziggy: "Browser image", editor: "Code editor", terminal: "Terminal", temporal: "Temporal UI"};
+  let answers = {}, current = "intro", completed = false;
+  const frames = {
+    ziggy: () => serviceUrl(8090, "/ziggy"),
+    editor: () => { const url = serviceUrl(8080); url.searchParams.set("folder", "/root/preflight"); return url; },
+    temporal: () => serviceUrl(8233, "/namespaces/default/workflows")
+  };
+
+  function show(step) {
+    current = step;
+    document.querySelectorAll("[data-step]").forEach(section => { section.hidden = section.dataset.step !== step; });
+    document.getElementById("progress").hidden = !ORDER.includes(step);
+    ORDER.forEach((key, index) => {
+      const dot = document.querySelector(`[data-dot="${key}"]`);
+      dot.dataset.state = key === step ? "current" : answers[key] === "yes" ? "yes" : answers[key] === "issue" ? "issue" : "todo";
+      if (key === step) dot.setAttribute("aria-current", "step"); else dot.removeAttribute("aria-current");
+    });
+    // Load each preview only when its step opens, so a failure belongs to that step.
+    const frame = document.querySelector(`[data-step="${step}"] iframe`);
+    if (frame && !frame.src && frames[step]) {
+      try { frame.src = frames[step](); } catch (err) { showError(err.message); }
+    }
+    if (step === "done") renderDone();
+    window.scrollTo(0, 0);
+    const heading = document.querySelector(`[data-step="${step}"] h1`);
+    if (heading) { heading.tabIndex = -1; heading.focus({preventScroll: true}); }
+  }
+
+  function renderDone() {
+    const results = document.getElementById("results");
+    results.replaceChildren(...ORDER.map(key => {
+      const item = document.createElement("li");
+      const value = answers[key];
+      item.dataset.answer = value || "none";
+      item.textContent = `${value === "yes" ? "✓" : value === "issue" ? "✗" : "–"} ${NAMES[key]}: ${value === "yes" ? "visible" : value === "issue" ? "not accessible" : "not answered"}`;
+      return item;
+    }));
+    const pass = ORDER.every(key => answers[key] === "yes");
+    document.getElementById("done-pass").hidden = !pass;
+    document.getElementById("done-fail").hidden = pass;
+    document.getElementById("done-title").textContent = pass ? "All four checks passed." : "Pre-flight finished with problems.";
+  }
+
+  function firstOpenStep() {
+    const open = ORDER.find(key => !answers[key]);
+    if (!open) return "done";
+    return open === ORDER[0] ? "intro" : open;
+  }
+
   function render(state) {
     if (state.revision < renderedRevision) return;
     renderedRevision = state.revision;
-    let count = 0;
+    answers = state.checks;
+    completed = Boolean(state.completed_at);
     for (const [key, value] of Object.entries(state.checks)) {
-      const card = document.querySelector(`[data-check="${key}"]`);
-      card.dataset.answer = value;
-      card.querySelector(".answer-label").textContent = value === "yes" ? "✓ Confirmed" : value === "issue" ? "! Needs a hand" : "Take a look";
-      card.querySelector(".help").hidden = value !== "issue";
-      for (const button of card.querySelectorAll("[data-answer]")) button.setAttribute("aria-pressed", String(button.dataset.answer === value));
-      if (value === "yes") count++;
+      const section = document.querySelector(`[data-step="${key}"]`);
+      section.dataset.answer = value;
+      section.querySelector(".help").hidden = value !== "issue";
+      section.querySelector("[data-next]").hidden = !value;
+      for (const button of section.querySelectorAll("[data-answer]")) button.setAttribute("aria-pressed", String(button.dataset.answer === value));
     }
-    document.getElementById("counter").textContent = `${count} / 4`;
-    document.getElementById("summary").textContent = state.completed_at ? "Clear for launch" : "visual checks confirmed";
-    document.getElementById("clearance").hidden = !state.completed_at;
   }
 
   function connectionStatus(text, status) { connection.textContent = text; connection.dataset.status = status; }
@@ -93,7 +140,7 @@
       clearTimeout(echoTimer);
       connectionStatus("! Live connection interrupted", "failed");
       if (!stopped && reconnects++ < 3) retryTimer = setTimeout(connect, 2000);
-      else if (!stopped) showError("The live connection is blocked or unavailable. Your IT team may need to allow secure WebSockets to Instruqt. You can still view your readiness report below. Reload Launchpad after the issue is resolved.");
+      else if (!stopped) showError("The live connection is blocked or unavailable. Your IT team may need to allow secure WebSockets to Instruqt. You can still view your readiness report below. Reload this page after the issue is resolved.");
     };
   }
 
@@ -106,9 +153,25 @@
       render(await api("/api/confirm", {check: card.dataset.check, value: button.dataset.answer}));
       document.getElementById("report-panel").hidden = true;
       error.hidden = true;
+      // A yes moves straight on; a problem stays put so the guest can read the help.
+      if (button.dataset.answer === "yes") goNext(card.dataset.check);
+      else if (current === "done") renderDone();
     } catch (err) { showError(err.message); }
     finally { buttons.forEach(item => item.disabled = false); button.textContent = button.dataset.label; }
   }));
+
+  function goNext(key) {
+    const index = ORDER.indexOf(key);
+    show(index === ORDER.length - 1 ? "done" : ORDER[index + 1]);
+  }
+  function goBack(step) {
+    const index = ORDER.indexOf(step);
+    show(step === "done" ? ORDER[ORDER.length - 1] : index === 0 ? "intro" : ORDER[index - 1]);
+  }
+  document.querySelectorAll("[data-next]").forEach(button => button.addEventListener("click", () => goNext(button.closest("[data-step]").dataset.step)));
+  document.querySelectorAll("[data-back]").forEach(button => button.addEventListener("click", () => goBack(button.closest("[data-step]").dataset.step)));
+  document.getElementById("start").addEventListener("click", () => show("ziggy"));
+  document.getElementById("restart").addEventListener("click", () => show("intro"));
 
   document.getElementById("report-button").addEventListener("click", async () => {
     try {
@@ -131,18 +194,12 @@
 
   async function start() {
     document.querySelectorAll(".answers button").forEach(button => button.dataset.label = button.textContent);
-    // Load independent surfaces immediately, alongside the readiness session request.
     try {
-      document.getElementById("ziggy-frame").src = serviceUrl(8090, "/ziggy");
-      // Exercise the second architecture-page port too; the guest sees one Ziggy card.
+      // Exercise the second architecture-page port too; the guest sees one Ziggy step.
       const image = document.createElement("img");
       image.alt = ""; image.hidden = true;
       image.src = serviceUrl(8092, "/assets/brand/ziggy-peek.png");
       document.body.append(image);
-      const editor = serviceUrl(8080);
-      editor.searchParams.set("folder", "/root/preflight");
-      document.getElementById("editor-frame").src = editor;
-      document.getElementById("temporal-frame").src = serviceUrl(8233, "/namespaces/default/workflows");
     } catch (err) { showError(err.message); }
     try { token = sessionStorage.getItem(storageKey); } catch (_) { /* Storage is optional. */ }
     try {
@@ -152,7 +209,8 @@
       token = state.session;
       try { sessionStorage.setItem(storageKey, token); } catch (_) { /* Keep this flight in memory. */ }
       render(state);
-      document.querySelectorAll(".answers button, #report-button").forEach(button => button.disabled = false);
+      document.querySelectorAll(".answers button, #report-button, #start").forEach(button => button.disabled = false);
+      show(firstOpenStep());
       connect();
     } catch (err) { showError(err.message); }
 

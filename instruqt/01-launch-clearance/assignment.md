@@ -1,8 +1,8 @@
 ---
 slug: launch-clearance
 type: challenge
-title: Ziggy's launch clearance
-teaser: Everything is running. Can you see it?
+title: Pre-flight check
+teaser: Confirm you can access the webinar content.
 tabs:
 - title: Launchpad
   type: service
@@ -31,22 +31,20 @@ difficulty: basic
 timelimit: 900
 ---
 
-# Ready when you are
+# Pre-flight check
 
-Everything has started for you.
+This Instruqt pre-flight challenge helps validate that you are able to access the webinar content. If you are not able to access the content, we suggest joining from a personal machine rather than a work machine.
 
-1. In **Launchpad**, look for Ziggy, the code editor and Temporal UI. Confirm each one you can see.
-2. Open **Terminal** above. Look for **ZIGGY ONLINE** and a ticking clock.
-3. Return to **Launchpad**, confirm the terminal, then click **Check** below.
+## What to do
 
-That’s it. No commands or editing.
+1. Stay on the **Launchpad** tab at the top of the screen. It walks you through four short steps, one at a time.
+2. In the **Terminal** step, Launchpad asks you to open the **Terminal** tab, look at it, and return to **Launchpad**.
+3. When Launchpad shows your results, click **Check** below.
 
-If a preview is small or blank, try its full-size tab above. A login page, spinner or error does not count as seeing the application.
+You do not need to install anything or type any commands.
 
-## Something blocked?
+## If something does not load
 
-Choose the issue button on that card. Launchpad shows help and a readiness report you can share with your webinar organizer.
+Answer "No" on that step. Launchpad shows what to try and gives you a report to share with your webinar organizer. If Launchpad itself is blank, tell your organizer "The pre-flight Launchpad did not load" and name your browser, and whether you are on a work laptop or VPN.
 
-If Launchpad itself is blank, tell your organizer **“Pre-flight Launchpad did not load”** and name your browser and whether you are using a work laptop or VPN. Your IT team can review the [Instruqt network requirements](https://docs.instruqt.com/reference/platform/third-party-network-access).
-
-Keep company security controls enabled. Use only an IT-approved alternative setup.
+Your IT team can review the [Instruqt network requirements](https://docs.instruqt.com/reference/platform/third-party-network-access).

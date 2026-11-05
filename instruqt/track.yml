@@ -1,11 +1,13 @@
 slug: temporal-pre-flight
-title: Temporal pre-flight - Ziggy's launch clearance
-teaser: See Ziggy, the editor, a live terminal and Temporal. Four quick yeses before your webinar.
+title: Temporal webinar pre-flight check
+teaser: Confirm you can access the webinar content before the event.
 description: |-
-  Check your webinar laptop and browser with Ziggy.
+  This Instruqt pre-flight challenge helps validate that you are able to access
+  the webinar content. If you are not able to access the content, we suggest
+  joining from a personal machine rather than a work machine.
 
-  Everything starts automatically. Confirm that you can see the browser page,
-  code editor, live terminal output and Temporal UI. No installs, typing or coding.
+  Four short steps: confirm you can see a browser page, the code editor, live
+  terminal output and the Temporal UI. No installs, typing or coding.
 
   Run this on the same laptop, browser and network you plan to use for the webinar.
   If a page is blocked, get a short report to share with your organizer or IT team.

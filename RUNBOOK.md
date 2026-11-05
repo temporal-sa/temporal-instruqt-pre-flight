@@ -20,11 +20,14 @@ Launchpad embeds the real browser page, code-server and Temporal UI. It does not
 
 ## The walkthrough
 
-1. Look for Ziggy and choose **Yes, there’s Ziggy**.
-2. Look for the editor and its welcome file; choose **Yes, editor’s here**. If necessary, open the full-size **Editor** tab and return.
-3. Open **Terminal**. Confirm that **ZIGGY ONLINE** appears and its clock ticks. Return to Launchpad and choose **Yes, clock’s ticking**.
-4. Look for the Temporal UI navigation and Workflows page. An empty list is expected. Choose **Yes, Temporal’s here**.
-5. Once the automatic WebSocket round trip succeeds, Launchpad shows **Clear for launch**. Click Instruqt’s **Check** to complete the course.
+Launchpad is a wizard that shows one step at a time. Answering **Yes** advances automatically; answering **No** shows help and a **Continue** button.
+
+0. Read the introduction and click **Start**.
+1. Browser: confirm you can see the Ziggy image.
+2. Editor: confirm the file list and welcome file. If necessary, open the full-size **Editor** tab and return.
+3. Terminal: open the **Terminal** tab, confirm **ZIGGY ONLINE** and a ticking clock, return to **Launchpad** and answer.
+4. Temporal UI: confirm the navigation and Workflows page. An empty list is expected.
+5. The results page lists each answer. Once all four are Yes and the WebSocket round trip has succeeded, it says you are ready. Click Instruqt’s **Check** to complete the course. Any No shows the advice to join from a personal machine.
 
 A guest can choose the issue response at any time, including after saying yes. That revokes their completed result. **View readiness report** works for incomplete flights too. The guest reviews and copies the report; the course sends no messages on their behalf.
 
