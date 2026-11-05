@@ -6,7 +6,7 @@ This Instruqt pre-flight challenge helps validate that you are able to access th
 
 After the sandbox is created, the **Launchpad** tab walks you through four steps, one at a time: a browser image, the code editor, the terminal and the Temporal UI. In the terminal step you open the **Terminal** tab, look for **ZIGGY ONLINE** and a ticking clock, then return to Launchpad. When the results page appears, click **Check** to finish. You do not need to install anything, type commands, edit files or provide an API key.
 
-If a preview is blank, try its full-size tab. Answer "No" for anything that stays blank, blocked or frozen. Launchpad provides a short report you can copy to your organizer.
+If a preview is blank, try its full-size tab. Answer "No" for anything that stays blank, blocked or frozen. Let your organizer know which step failed.
 
 ## If you cannot open the invite or Launchpad
 

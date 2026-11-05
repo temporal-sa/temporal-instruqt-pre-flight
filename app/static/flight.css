@@ -45,10 +45,10 @@ code { color: var(--green); font: 14px var(--font-mono); overflow-wrap: anywhere
 .results [data-answer="yes"] { color: var(--green); }
 .results [data-answer="issue"] { color: var(--red); }
 .error { color: var(--red); padding: 16px; border: 1px solid currentColor; line-height: 1.7; }
-#report-panel { margin-top: 24px; }
-#report { display: block; width: 100%; background: #10131b; color: var(--off-white); border: 1px solid var(--slate-300); padding: 16px; font: 12px/1.6 var(--font-mono); margin: 16px 0; resize: vertical; }
-#copy-status { margin-left: 12px; font-size: 13px; }
 [hidden] { display: none !important; }
 :focus-visible { outline: 3px solid var(--green); outline-offset: 4px; }
 @media (max-width: 900px) { main { padding: 24px 18px; } .masthead { padding: 18px; } .preview { height: 340px; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+.shot { margin: 20px 0; max-width: 760px; }
+.shot img { display: block; width: 100%; height: auto; border: 1px solid var(--slate-500); }
+.shot figcaption { font-size: 13px; color: var(--slate-300); margin-top: 8px; }

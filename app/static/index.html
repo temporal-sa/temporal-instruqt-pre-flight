@@ -49,7 +49,7 @@
       <p class="lede">You should see a small illustrated space explorer named Ziggy.</p>
       <div class="preview"><iframe id="ziggy-frame" title="Ziggy image preview"></iframe></div>
       <div class="answers" role="group" aria-label="Can you see the image?"><button type="button" class="button secondary green" data-answer="yes" aria-pressed="false" disabled>Yes, I can see it</button><button type="button" class="button ghost off-white" data-answer="issue" aria-pressed="false" disabled>No, it is blank or missing</button></div>
-      <div class="help" hidden><p>A blank frame usually means a work network or browser policy is blocking the page. Open the <strong>Browser</strong> tab at the top of the screen to try again at full size. If it is still blank, continue to the next step. Your report will list this as a problem to share with your organizer.</p></div>
+      <div class="help" hidden><p>A blank frame usually means a work network or browser policy is blocking the page. Open the <strong>Browser</strong> tab at the top of the screen to try again at full size. If it is still blank, continue to the next step. </p></div>
       <div class="nav"><button type="button" class="button ghost off-white" data-back>Back</button><button type="button" class="button secondary ultraviolet" data-next hidden>Continue</button></div>
     </section>
 
@@ -72,9 +72,10 @@
         <li>Look for the text <code>ZIGGY ONLINE</code> and a clock that changes every second. You do not need to type anything.</li>
         <li>Click the <strong>Launchpad</strong> tab to come back here and answer below.</li>
       </ol>
+      <figure class="shot"><img src="/assets/help/terminal-tab.png" alt="Instruqt screen with a red arrow pointing at the Terminal tab in the row of tabs at the top" width="1400"><figcaption>The <strong>Terminal</strong> tab is in the row of tabs at the very top of the Instruqt screen.</figcaption></figure>
       <h2>Did the terminal show a ticking clock?</h2>
       <div class="answers" role="group" aria-label="Did the terminal show a ticking clock?"><button type="button" class="button secondary green" data-answer="yes" aria-pressed="false" disabled>Yes, the clock was ticking</button><button type="button" class="button ghost off-white" data-answer="issue" aria-pressed="false" disabled>No, it was blank or frozen</button></div>
-      <div class="help" hidden><p>If the terminal stays blank or the clock stops, the live connection may be blocked. Your IT team may need to allow <code>wss://*.env.play.instruqt.com</code> on port 443. Continue to the next step and share the report with your organizer.</p></div>
+      <div class="help" hidden><p>If the terminal stays blank or the clock stops, the live connection may be blocked. Your IT team may need to allow <code>wss://*.env.play.instruqt.com</code> on port 443. Continue to the next step, and let your webinar organizer know.</p></div>
       <div class="nav"><button type="button" class="button ghost off-white" data-back>Back</button><button type="button" class="button secondary ultraviolet" data-next hidden>Continue</button></div>
     </section>
 
@@ -84,7 +85,7 @@
       <p class="lede">You should see a navigation menu and a Workflows page. An empty list is expected.</p>
       <div class="preview"><iframe id="temporal-frame" title="Live Temporal UI"></iframe></div>
       <div class="answers" role="group" aria-label="Can you see the Temporal UI?"><button type="button" class="button secondary green" data-answer="yes" aria-pressed="false" disabled>Yes, I can see it</button><button type="button" class="button ghost off-white" data-answer="issue" aria-pressed="false" disabled>No, it is blank or an error</button></div>
-      <div class="help" hidden><p>Open the <strong>Temporal UI</strong> tab at the top of the screen to try it at full size. Answer yes only if you see the application itself, not a login page, error or loading spinner. If it fails there too, continue and share the report with your organizer.</p></div>
+      <div class="help" hidden><p>Open the <strong>Temporal UI</strong> tab at the top of the screen to try it at full size. Answer yes only if you see the application itself, not a login page, error or loading spinner. If it fails there too, continue, and let your webinar organizer know.</p></div>
       <div class="nav"><button type="button" class="button ghost off-white" data-back>Back</button><button type="button" class="button secondary ultraviolet" data-next hidden>Finish</button></div>
     </section>
 
@@ -98,10 +99,9 @@
       </div>
       <div id="done-fail" class="note fail" hidden>
         <h2>Some content was not accessible</h2>
-        <p>We suggest joining the webinar from a personal machine rather than a work machine. If you need to use this machine, share the report below with your organizer and ask your IT team to review the <a href="https://docs.instruqt.com/reference/platform/third-party-network-access" target="_blank" rel="noopener noreferrer">Instruqt network requirements ↗</a>.</p>
+        <p>We suggest joining the webinar from a personal machine rather than a work machine. If you need to use this machine, tell your webinar organizer and ask your IT team to review the <a href="https://docs.instruqt.com/reference/platform/third-party-network-access" target="_blank" rel="noopener noreferrer">Instruqt network requirements ↗</a>.</p>
       </div>
-      <div class="nav"><button type="button" class="button ghost off-white" data-back>Back</button><button id="report-button" class="button secondary ultraviolet" type="button" disabled>View report to share</button><button id="restart" type="button" class="button ghost off-white">Start over</button></div>
-      <section id="report-panel" hidden aria-labelledby="report-title"><h2 id="report-title">Your report</h2><p>Select and copy this text to share it. It contains your answers and a random reference, with no personal details.</p><textarea id="report" readonly rows="16" aria-label="Report"></textarea><button id="copy-report" class="button secondary green small" type="button">Copy report</button><span id="copy-status" role="status"></span></section>
+      <div class="nav"><button type="button" class="button ghost off-white" data-back>Back</button><button id="restart" type="button" class="button ghost off-white">Start over</button></div>
     </section>
   </main>
 </body>

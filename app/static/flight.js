@@ -37,7 +37,7 @@
       failure.status = response.status;
       throw failure;
     }
-    return path === "/api/report" ? response.text() : response.json();
+    return response.json();
   }
 
   const ORDER = ["ziggy", "editor", "terminal", "temporal"];
@@ -142,7 +142,7 @@
       clearTimeout(echoTimer);
       connectionStatus("! Live connection interrupted", "failed");
       if (!stopped && reconnects++ < 3) retryTimer = setTimeout(connect, 2000);
-      else if (!stopped) showError("The live connection is blocked or unavailable. Your IT team may need to allow secure WebSockets to Instruqt. You can still view your readiness report below. Reload this page after the issue is resolved.");
+      else if (!stopped) showError("The live connection is blocked or unavailable. Your IT team may need to allow secure WebSockets to Instruqt. Reload this page after the issue is resolved.");
     };
   }
 
@@ -153,7 +153,6 @@
     button.textContent = "Saving…";
     try {
       render(await api("/api/confirm", {check: card.dataset.check, value: button.dataset.answer}));
-      document.getElementById("report-panel").hidden = true;
       error.hidden = true;
       // A yes moves straight on; a problem stays put so the guest can read the help.
       if (button.dataset.answer === "yes") goNext(card.dataset.check);
@@ -175,23 +174,6 @@
   document.getElementById("start").addEventListener("click", () => show("ziggy"));
   document.getElementById("restart").addEventListener("click", () => show("intro"));
 
-  document.getElementById("report-button").addEventListener("click", async () => {
-    try {
-      document.getElementById("report").value = await api("/api/report");
-      document.getElementById("report-panel").hidden = false;
-      document.getElementById("report").focus();
-    } catch (err) { showError(err.message); }
-  });
-  document.getElementById("copy-report").addEventListener("click", async () => {
-    const report = document.getElementById("report");
-    try {
-      await navigator.clipboard.writeText(report.value);
-      document.getElementById("copy-status").textContent = "Copied.";
-    } catch (_) {
-      report.focus(); report.select();
-      document.getElementById("copy-status").textContent = "Copy is restricted. Use your browser’s Copy command on the selected text.";
-    }
-  });
   window.addEventListener("pagehide", () => { stopped = true; clearTimeout(retryTimer); clearTimeout(echoTimer); socket?.close(); });
 
   async function start() {
@@ -211,7 +193,7 @@
       token = state.session;
       try { sessionStorage.setItem(storageKey, token); } catch (_) { /* Keep this flight in memory. */ }
       render(state);
-      document.querySelectorAll(".answers button, #report-button, #start").forEach(button => button.disabled = false);
+      document.querySelectorAll(".answers button, #start").forEach(button => button.disabled = false);
       show(firstOpenStep());
       connect();
     } catch (err) { showError(err.message); }

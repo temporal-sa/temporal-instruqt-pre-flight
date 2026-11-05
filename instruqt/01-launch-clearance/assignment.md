@@ -45,6 +45,6 @@ You do not need to install anything or type any commands.
 
 ## If something does not load
 
-Answer "No" on that step. Launchpad shows what to try and gives you a report to share with your webinar organizer. If Launchpad itself is blank, tell your organizer "The pre-flight Launchpad did not load" and name your browser, and whether you are on a work laptop or VPN.
+Answer "No" on that step. Launchpad shows what to try. Let your webinar organizer know what did not load. If Launchpad itself is blank, tell your organizer "The pre-flight Launchpad did not load" and name your browser, and whether you are on a work laptop or VPN.
 
 Your IT team can review the [Instruqt network requirements](https://docs.instruqt.com/reference/platform/third-party-network-access).
