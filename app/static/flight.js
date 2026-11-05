@@ -74,7 +74,7 @@
     results.replaceChildren(...ORDER.map(key => {
       const item = document.createElement("li");
       const value = answers[key];
-      item.dataset.answer = value || "none";
+      item.dataset.answer = value === "yes" || value === "issue" ? value : "none";
       item.textContent = `${value === "yes" ? "✓" : value === "issue" ? "✗" : "–"} ${NAMES[key]}: ${value === "yes" ? "visible" : value === "issue" ? "not accessible" : "not answered"}`;
       return item;
     }));
@@ -84,8 +84,10 @@
     document.getElementById("done-title").textContent = pass ? "All four checks passed." : "Pre-flight finished with problems.";
   }
 
+  function isAnswered(key) { return answers[key] === "yes" || answers[key] === "issue"; }
+
   function firstOpenStep() {
-    const open = ORDER.find(key => !answers[key]);
+    const open = ORDER.find(key => !isAnswered(key));
     if (!open) return "done";
     return open === ORDER[0] ? "intro" : open;
   }
@@ -99,7 +101,7 @@
       const section = document.querySelector(`[data-step="${key}"]`);
       section.dataset.answer = value;
       section.querySelector(".help").hidden = value !== "issue";
-      section.querySelector("[data-next]").hidden = !value;
+      section.querySelector("[data-next]").hidden = value !== "yes" && value !== "issue";
       for (const button of section.querySelectorAll("[data-answer]")) button.setAttribute("aria-pressed", String(button.dataset.answer === value));
     }
   }

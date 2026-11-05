@@ -14,8 +14,8 @@ h1 { font-size: clamp(28px, 3.4vw, 44px); line-height: 1.12; letter-spacing: -.0
 .badge { font-size: 11px; padding: 7px 10px; color: var(--yellow); border-color: currentColor; }
 .badge[data-status="completed"] { color: var(--green); }
 .badge[data-status="failed"] { color: var(--red); }
-main { max-width: 960px; }
-.step { margin-top: 8px; }
+.masthead, main { max-width: 960px; }
+.wizard-step { margin-top: 8px; }
 .progress ol { list-style: none; display: flex; gap: 8px; padding: 0; margin: 0 0 24px; flex-wrap: wrap; }
 .progress li { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--slate-300); padding: 8px 12px 8px 8px; border: 1px solid var(--border); }
 .progress li span { display: inline-grid; place-items: center; width: 24px; height: 24px; border: 1px solid currentColor; border-radius: 50%; font: 12px var(--font-mono); }
